@@ -1313,6 +1313,8 @@ static void sanitize_aux_ch(struct drm_i915_private *dev_priv,
 
 	p = get_port_by_aux_ch(dev_priv, info->alternate_aux_channel);
 	if (p != PORT_NONE) {
+		info = &dev_priv->vbt.ddi_port_info[p];
+
 		DRM_DEBUG_KMS("port %c trying to use the same AUX CH (0x%x) as port %c, "
 			      "disabling port %c DP support\n",
 			      port_name(port), info->alternate_aux_channel,
@@ -1330,6 +1332,7 @@ static void sanitize_aux_ch(struct drm_i915_private *dev_priv,
 		info->supports_dp = false;
 		info->alternate_aux_channel = 0;
 	}
+
 }
 
 static const u8 cnp_ddc_pin_map[] = {
